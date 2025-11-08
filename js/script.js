@@ -580,13 +580,9 @@ function addInteractiveEffects() {
         createSparkle(e.clientX, e.clientY);
     });
 
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const heroCarousel = document.querySelector('.hero-carousel');
-        if (heroCarousel) {
-            heroCarousel.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
+    // NOTE: Removed the parallax transform on scroll that moved the .hero-carousel visually.
+    // That transform caused the carousel to overlap the content below because transforms do not affect layout.
+    // Keeping the carousel in normal document flow ensures categories always remain visible and do not overlap.
 }
 
 
