@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO BÁSICO -->
+    <title>Camelia Juguetería | Juguetes didácticos y divertidos para niños</title>
+    <meta name="description" content="Camelia Juguetería ofrece juguetes didácticos, ecológicos y educativos para todas las edades. Encontrá ofertas, personajes favoritos y novedades exclusivas.">
+    <meta name="keywords" content="juguetes en Gálvez, juguetes didácticos, juguetes en oferta, regalos para niños, juegos educativos, Camelia Juguetería, juegos de mesa, libros infantiles, muñecas, bloques de construcción">
+
+    <!-- SEO AVANZADO -->
+    <meta name="author" content="Camelia Juguetería">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ff69b4">
+
+    <!-- SOCIAL-->
+    <meta property="og:title" content="Camelia Juguetería | Juguetes didácticos y ecológicos">
+    <meta property="og:description" content="Descubrí juguetes educativos, ecológicos y llenos de diversión. Camelia Juguetería te acompaña en cada etapa del juego.">
+    <meta property="og:image" content="https://www.camelia.com.ar/img/Logo%20Camelia.png">
+    <meta property="og:url" content="https://www.camelia.com.ar">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/cart.js"></script>
+    <script defer src="js/catalog.js"></script>
+    <script defer src="js/menu-active.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                <img src="img/Logo Camelia.png" alt="Camelia Logo" class="logo-img">
+                </a>
+            </div>
+
+            <div class="search-container">
+                <form action="catalog.html" method="GET" role="search" class="search-form">
+                <input type="text" name="q" placeholder="Buscar juguetes..." class="search-input">
+                <button type="submit" class="search-btn" aria-label="Buscar">
+                <i class="fas fa-search"></i>
+                </button>
+                </form>
+            </div>
+            
+            <div class="header-actions">
+                <a href="register.html" class="register-btn">
+                <i class="fas fa-user-plus"></i> Registrate
+                </a>
+                <span id="user-info" style="display:none;"></span>
+                <a href="login.html" class="auth-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Iniciar Sesión
+                </a>
+                <a href="#" id="logout-btn" style="display:none;">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+                <a href="profile.html" class="profile-btn" aria-label="Mi perfil">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <a href=cart.html class="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list" id="main-nav-list">
+                <li><a href="index.html" class="nav-link" data-page="index">Inicio</a></li>
+                <li><a href="quienes-somos.html" class="nav-link" data-page="quienes-somos">Quiénes somos</a></li>
+                <li><a href="catalog.html" class="nav-link" data-page="catalog">Catálogo</a></li>
+                <li><a href="catalog.html?filter=offer" class="nav-link" data-page="ofertas">Ofertas</a></li>
+                <li><a href="points.html" class="nav-link" data-page="points">Canjeá tus puntos</a></li>
+            </ul>
+        </div>
+    </nav>

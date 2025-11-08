@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canjeá tus Puntos | Camelia Juguetería</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/points.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/menu-active.js"></script> 
+    <script defer src="js/load-components.js"></script>
+    <script defer src="js/cart.js"></script> <script defer src="js/points.js"></script> </head>
+<body>
+    
+ <div id="header-placeholder"></div>
+
+    <main class="main-content container points-page">
+        <h1 class="page-title"><i class="fas fa-trophy"></i> Mis Puntos Camelia</h1>
+        
+        <section class="points-balance card">
+            <div class="balance-summary">
+                <span class="balance-label">Tus Puntos Disponibles</span>
+                <span id="current-points" class="balance-value">0</span> 
+            </div>
+            <div class="balance-info">
+                <p>¡El sistema de Puntos Camelia te permite acumular recompensas! Ganás 10 puntos por cada $100 que gastás y luego podés canjearlos por productos exclusivos.</p>
+                <p><a href="history.html" class="secondary-link">Ver Historial de Pedidos</a></p>
+            </div>
+        </section>
+
+        <section class="redemption-catalog">
+            <h2 class="section-title">Productos para Canjear</h2>
+            <p class="subtitle">Utiliza tus puntos acumulados para obtener premios:</p>
+
+            <div class="product-grid" id="redemption-grid">
+                <p id="loading-prizes">Cargando premios disponibles...</p>
+                <p id="no-prizes" style="display:none;">No hay premios disponibles para canjear en este momento.</p>
+            </div>
+        </section>
+        
+        <section class="redemption-notice">
+            <i class="fas fa-info-circle"></i> 
+            <p>Al hacer click en "Canjear", el premio se agregará a tu carrito. Serás redirigido al checkout para coordinar el envío (no se aplicará ningún costo monetario).</p>
+        </section>
+
+    </main>
+
+  <div id="footer-placeholder"></div>
+</body>
+</html>

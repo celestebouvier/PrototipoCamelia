@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO BÁSICO -->
+    <title>Camelia Juguetería | Juguetes didácticos y divertidos para niños</title>
+    <meta name="description" content="Camelia Juguetería ofrece juguetes didácticos, ecológicos y educativos para todas las edades. Encontrá ofertas, personajes favoritos y novedades exclusivas.">
+    <meta name="keywords" content="juguetes en Gálvez, juguetes didácticos, juguetes en oferta, regalos para niños, juegos educativos, Camelia Juguetería, juegos de mesa, libros infantiles, muñecas, bloques de construcción">
+
+    <!-- SEO AVANZADO -->
+    <meta name="author" content="Camelia Juguetería">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ff69b4">
+
+    <!-- SOCIAL-->
+    <meta property="og:title" content="Camelia Juguetería | Juguetes didácticos y ecológicos">
+    <meta property="og:description" content="Descubrí juguetes educativos, ecológicos y llenos de diversión. Camelia Juguetería te acompaña en cada etapa del juego.">
+    <meta property="og:image" content="https://www.camelia.com.ar/img/Logo%20Camelia.png">
+    <meta property="og:url" content="https://www.camelia.com.ar">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/cart.js"></script>
+    <script defer src="js/catalog.js"></script>
+    <script defer src="js/menu-active.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                <img src="img/Logo Camelia.png" alt="Camelia Logo" class="logo-img">
+                </a>
+            </div>
+
+            <div class="search-container">
+                <form action="catalog.html" method="GET" role="search" class="search-form">
+                <input type="text" name="q" placeholder="Buscar juguetes..." class="search-input">
+                <button type="submit" class="search-btn" aria-label="Buscar">
+                <i class="fas fa-search"></i>
+                </button>
+                </form>
+            </div>
+            
+            <div class="header-actions">
+                <a href="register.html" class="register-btn">
+                <i class="fas fa-user-plus"></i> Registrate
+                </a>
+                <span id="user-info" style="display:none;"></span>
+                <a href="login.html" class="auth-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Iniciar Sesión
+                </a>
+                <a href="#" id="logout-btn" style="display:none;">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+                <a href="profile.html" class="profile-btn" aria-label="Mi perfil">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <a href=cart.html class="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list" id="main-nav-list">
+                <li><a href="index.html" class="nav-link" data-page="index">Inicio</a></li>
+                <li><a href="quienes-somos.html" class="nav-link" data-page="quienes-somos">Quiénes somos</a></li>
+                <li><a href="catalog.html" class="nav-link" data-page="catalog">Catálogo</a></li>
+                <li><a href="catalog.html?filter=offer" class="nav-link" data-page="ofertas">Ofertas</a></li>
+                <li><a href="points.html" class="nav-link" data-page="points">Canjeá tus puntos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide active" style="background-image: url('img/slide1.png')">
+                <div class="slide-content">
+                    <h2>¡Bienvenido a Camelia!</h2>
+                    <p>Aprovechá las mejores ofertas. Hasta 50% OFF.</p>
+                    <a href="catalog.html?filter=offer" class="cta-btn">Explorar ahora</a>
+                </div>
+            </div>
+            
+            <div class="carousel-slide" style="background-image: url('img/slide2.png')">
+                <div class="slide-content">
+                    <h2>Mundo lector</h2>
+                    <p>Libros que enseñan y acompañan cada etapa de la infancia</p>
+                    <a href="catalog.html?filter-type=Mundo-lector" class="cta-btn" aria-label="Botón de ver colección de libros">Ver Colección</a>
+                </div>
+            </div>
+            
+            <div class="carousel-slide" style="background-image: url('img/slide3.jpg')">
+                <div class="slide-content">
+                    <h2>Diversión consciente</h2>
+                    <p>Juegos de mesa que inspiran y educan</p>
+                    <a href="catalog.html?filter-type=Juegos-de-mesa" class="cta-btn" aria-label="Botón de ver juegos de mesa">Descubrir</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+        
+        <button class="carousel-btn prev" id="prevBtn" aria-label="Diapositiva anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" id="nextBtn" aria-label="Diapositiva siguiente">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </section>
+
+    <section class="categories">
+        <div class="container">            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Acción">
+                    <div class="category-icon">
+                        <i class="fas fa-fist-raised"></i>
+                    </div>
+                    <h3>Acción</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Aire-libre">
+                    <div class="category-icon">
+                        <i class="fas fa-bicycle"></i>
+                    </div>
+                    <h3>Aire libre</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Arte-y-manualidades">
+                    <div class="category-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Arte y manualidades</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Bloques-y-construcci%C3%B3n">
+                    <div class="category-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Bloques y construcción</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Juegos-de-mesa">
+                    <div class="category-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3>Juegos de mesa</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Muñecas">
+                    <div class="category-icon">
+                        <i class="bi bi-balloon-heart"></i>
+                    </div>
+                    <h3>Muñecas</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Musicales">
+                    <div class="category-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Musicales</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                     <a href="catalog.html?filter-type=Peluches">
+                    <div class="category-icon">
+                        <i class="bi bi-emoji-smile"></i>
+                    </div>
+                    <h3>Peluches</h3>
+                    </a>
+                </div>
+                
+                <div class="category-card">
+                    <a href="catalog.html?filter-type=Mundo-lector">
+                    <div class="category-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Mundo lector</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="character-categories">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Explorá juguetes de tus personajes favoritos
+                <i class="fas fa-star"></i>
+            </h2>
+            
+            <div class="character-carousel-container">
+                <button class="character-carousel-btn prev" id="characterPrevBtn" aria-label="Diapositiva anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                 <div class="character-carousel">
+                    <div class="character-track">
+                        
+                        <div class="character-card avengers">
+                            <a href="catalog.html?filter-character=Avengers"> 
+                                <h3>Avengers</h3>
+                                <p>Súper héroes</p>
+                            </a>
+                        </div>
+
+                        <div class="character-card barbie">
+                            <a href="catalog.html?filter-character=Barbie">  
+                                <h3>Barbie</h3>
+                                <p>Mundo de fantasía</p>
+                            </a> 
+                        </div>
+
+                        <div class="character-card cars">
+                            <a href="catalog.html?filter-character=Cars"> 
+                                <h3>Cars</h3>
+                                <p>Aventuras sobre ruedas</p>
+                            </a>
+                        </div>
+
+                        <div class="character-card frozen">
+                            <a href="catalog.html?filter-character=Frozen"> 
+                                <h3>Frozen</h3>
+                                <p>Reino de hielo</p>
+                            </a>
+                        </div>
+                        
+                        <div class="character-card hotwheels">
+                            <a href="catalog.html?filter-character=Hot-Wheels"> 
+                                <h3>Hot Wheels</h3>
+                                <p>Velocidad extrema</p>
+                            </a>
+                        </div>
+
+                        <div class="character-card liloystitch">
+                            <a href="catalog.html?filter-character=Lilo-y-Stitch">
+                                <h3>Lilo y Stitch</h3>
+                                <p>'Ohana' y familia</p>
+                            </a>
+                        </div>
+                        
+                        <div class="character-card mickeyminnie">
+                            <a href="catalog.html?filter-character=Mickey-y-Minnie">
+                                <h3>Mickey y Minnie</h3>
+                                <p>Diversión clásica</p>
+                            </a>
+                        </div>
+
+                        <div class="character-card minecraft">
+                            <a href="catalog.html?filter-character=Minecraft">
+                                <h3>Minecraft</h3>
+                                <p>Construye tu mundo</p>
+                            </a>
+                        </div>
+                        
+                        <div class="character-card pawpatrol">
+                            <a href="catalog.html?filter-character=Paw-Patrol">
+                                <h3>Paw Patrol</h3>
+                                <p>Cachorros al rescate</p>
+                            </a>
+                        </div>
+
+                        <div class="character-card toystory">
+                            <a href="catalog.html?filter-character=Toy-Story">
+                                <h3>Toy Story</h3>
+                                <p>Juguetes vivientes</p>
+                            </a>
+                        </div>
+                        </div>
+                </div>
+                
+                
+                <button class="character-carousel-btn next" id="characterNextBtn" aria-label="Diapositiva siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="environmental-commitment">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-leaf"></i>
+                Nuestro compromiso con el medio ambiente
+                <i class="fas fa-leaf"></i>
+            </h2>
+            
+            <div class="commitment-content">
+                <div class="commitment-grid">
+                    <div class="commitment-card">
+                        <div class="commitment-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h4>Empaque Ecológico</h4>
+                        <p>Ofrecemos la opción de empaque ecológico sin costo adicional. Utilizamos cajas de cartón reciclado para proteger tus compras.</p>
+                    </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>¡Unite a nuestra comunidad!</h2>
+                    <p>Recibí novedades de ofertas especiales y nuevos lanzamientos</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" aria-label="Ingresa tu correo electrónico" placeholder="Tu correo electrónico" class="newsletter-input">
+                    <button class="newsletter-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Suscribirse
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span>Camelia</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://facebook.com" class="social-link" aria-label="Visítanos en Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" class="social-link" aria-label="Visítanos en Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Información</h3>
+                    <ul>
+                        <li><a href="quienes-somos.html">Sobre Nosotros</a></li>
+                        <li><a href="envios.html">Envíos</a></li>
+                        <li><a href="devoluciones.html">Devoluciones</a></li>
+                    </ul>
+                </div>
+            
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="terminosycondiciones.html">Términos y Condiciones</a></li>
+                        <li><a href="politicasdeprivacidad.html">Política de Privacidad</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Camelia. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/56912345678" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+
+</body>
+</html>

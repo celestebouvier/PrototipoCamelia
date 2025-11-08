@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | Camelia Juguetería</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/profile.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script defer src="js/script.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/menu-active.js"></script> 
+    <script defer src="js/profile.js"></script> </head>
+    <script defer src="js/load-components.js"></script>
+<body>
+    
+<div id="header-placeholder"></div>
+
+    <main class="main-content container profile-page">
+        <h1 class="page-title"><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+        
+        <div class="profile-layout">
+            
+            <aside class="profile-sidebar card">
+                <p id="user-greeting" class="user-greeting-text">Hola, [Nombre Usuario]</p>
+                <ul class="profile-menu">
+                    <li class="active"><a href="profile.html"><i class="fas fa-user-edit"></i> Datos Personales</a></li>
+                    <li><a href="history.html"><i class="fas fa-box-open"></i> Historial de Pedidos</a></li>
+                    <li><a href="points.html"><i class="fas fa-trophy"></i> Mis Puntos Camelia</a></li>
+                </ul>
+                <button id="logout-profile-btn" class="cta-btn secondary-btn" style="margin-top: 20px;">Cerrar Sesión</button>
+            </aside>
+
+            <section class="profile-details card">
+                <h2>Actualizar Información</h2>
+                <div id="profile-message" class="auth-message" style="display:none;"></div>
+                <form id="profile-form">
+                    
+                    <div class="form-group">
+                        <label for="profile-name">Nombre Completo</label>
+                        <input type="text" id="profile-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-email">Correo Electrónico</label>
+                        <input type="email" id="profile-email" disabled>
+                        <small>El email no se puede modificar.</small>
+                    </div>
+
+                    <h3>Cambiar Contraseña</h3>
+                    <div class="form-group">
+                        <label for="current-password">Contraseña Actual</label>
+                        <input type="password" id="current-password" placeholder="Ingresa tu contraseña actual">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-password">Nueva Contraseña</label>
+                        <input type="password" id="new-password" placeholder="Mínimo 6 caracteres">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="confirm-password" placeholder="Repite la nueva contraseña">
+                    </div>
+                    
+                    <button type="submit" class="cta-btn primary-btn">Guardar Cambios</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+      <div id="footer-placeholder"></div>
+</body>
+</html>

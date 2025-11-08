@@ -1,0 +1,76 @@
+/* css/profile.css */
+
+.profile-page {
+    padding-top: 40px;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Menú lateral y contenido */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Estilos para el Menú Lateral */
+.profile-sidebar {
+    padding: 20px;
+}
+
+.user-greeting-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-blue); /* Color principal del diseño */
+}
+
+.profile-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-menu li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+}
+
+.profile-menu li a i {
+    margin-right: 10px;
+    color: var(--primary-pink); 
+}
+
+.profile-menu li:hover a,
+.profile-menu li.active a {
+    background-color: var(--light-gray, #f0f0f0);
+    font-weight: 500;
+}
+
+/* Estilos para el Formulario de Detalle */
+.profile-details {
+    padding: 30px;
+}
+
+.profile-details h2 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light-gray, #f0f0f0);
+    padding-bottom: 10px;
+}
+
+.profile-details h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Media Query para móvil */
+@media (max-width: 768px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+}

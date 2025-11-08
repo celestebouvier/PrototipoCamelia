@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Compras - Camelia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/load-components.js"></script>
+  <script defer src="js/script.js"></script> 
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="history-container">
+    <h2>Historial de Compras</h2>
+    <div id="history-list"></div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    function printOrderToPDF(orderId) {
+        // Redirige a la página de detalle y ejecuta la impresión (el navegador permite "Guardar como PDF")
+        const detailUrl = `order-detail.html?orderId=${orderId}&print=true`;
+        window.open(detailUrl, '_blank');
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        alert("Debes iniciar sesión para ver tu historial.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const history = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+      const userHistory = history.filter(h => h.userEmail === currentUser.email);
+
+      const listEl = document.getElementById("history-list");
+      if (userHistory.length === 0) {
+        listEl.innerHTML = "<p>No tienes compras registradas aún.</p>";
+        return;
+      }
+
+userHistory.forEach(order => {
+            const div = document.createElement("div");
+            div.className = "order-card";
+            div.innerHTML = `
+              <div class="order-header">
+                <p><strong>Orden #${order.orderId}</strong></p>
+                <p><strong>Fecha:</strong> ${order.date}</p>
+                <p><strong>Total:</strong> $${(order.total || 0).toLocaleString('es-AR')}</p>
+                <a href="order-detail.html?orderId=${order.orderId}" class="secondary-link">Ver detalle</a>
+                <button class="print-pdf-btn" data-order-id="${order.orderId}" style="margin-left: 10px; background-color: #2ecc71; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+                    Imprimir PDF
+                </button>
+              </div>
+              <ul class="order-items">
+                ${order.items.map(i => `
+                  <li>
+                    <img src="img/${i.img}" alt="${i.name}" />
+                    <span>${i.qty} × ${i.name}</span>
+                    <span class="price">$${(i.price || 0).toLocaleString('es-AR')}</span>
+                  </li>
+                `).join("")}
+              </ul>
+            `;
+            listEl.appendChild(div);
+        });
+
+        // Add listener for all print buttons
+        document.querySelectorAll('.print-pdf-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const orderId = e.target.dataset.orderId;
+                printOrderToPDF(orderId);
+            });
+        });
+    });
+</script>
+</body>
+</html>
+

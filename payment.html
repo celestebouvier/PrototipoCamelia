@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pago con Tarjeta - Camelia</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/payment.css"/>
+  <script defer src="js/payment.js"></script>
+  <script defer src="js/auth.js"></script>
+  <script defer src="js/load-components.js"></script>
+</head>
+<body>
+  <div class="content-wrap">
+    <div id="header-placeholder"></div>
+
+    <main class="payment-container container">
+      <h1 class="page-title"><i class="fas fa-credit-card"></i> Pago con Tarjeta Bancaria</h1>
+      <form id="payment-form" class="payment-form">
+        <div class="form-group">
+          <label for="cardName">Nombre completo del titular</label>
+          <input type="text" id="cardName" required placeholder="Ej: Juan Pérez">
+        </div>
+
+        <div class="form-group">
+          <label for="cardNumber">Número de tarjeta</label>
+          <input type="text" id="cardNumber" required maxlength="19" placeholder="XXXX XXXX XXXX XXXX" inputmode="numeric">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="cardExp">Fecha de vencimiento</label>
+            <input type="text" id="cardExp" required maxlength="5" placeholder="MM/AA">
+          </div>
+          <div class="form-group half">
+            <label for="cardCvv">Código de seguridad (CVV)</label>
+            <input type="password" id="cardCvv" required maxlength="3" placeholder="123">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cardId">DNI del titular</label>
+          <input type="text" id="cardId" required maxlength="8" placeholder="Solo números">
+        </div>
+
+        <button type="submit" class="cta-btn primary-btn">Confirmar Pago</button>
+        <p class="form-message" id="form-message"></p>
+      </form>
+    </main>
+  </div>
+  <div id="footer-placeholder"></div>
+</body>
+</html>

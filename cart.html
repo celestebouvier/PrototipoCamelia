@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito - Camelia</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/cart.css"/> <script defer src="js/cart.js"></script>
+  <script defer src="js/script.js"></script>
+  <script defer src="js/auth.js"></script> <script defer src="js/load-components.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="content-wrap">
+        <div id="header-placeholder"></div>
+        
+        <div class="container cart-page">
+            <h1>Tu Carrito de Compras</h1>
+            
+            <main class="cart-layout">
+                <section class="cart-items-container">
+                    <h2>Productos en tu Carrito</h2>
+                    <div id="cart-list" class="cart-product-list">
+                        <p class="empty-cart-message" style="display:none;">Tu carrito está vacío.</p>
+                    </div>
+                </section>
+                
+        <aside class="cart-summary-container">
+          <div class="cart-summary-box">
+            <h2>Resumen de Compra</h2>
+            <div class="summary-details">
+              <p>
+                Subtotal (<span id="summary-total-products">0</span> productos): 
+                <span id="summary-subtotal">$0</span>
+              </p>
+              <hr>
+              <p class="summary-total-final">
+                Total estimado: <span id="summary-total">$0</span>
+              </p>
+              <p style="font-size: 0.85rem; color:#777;">
+                *El costo final (envío y extras) se calcula en la siguiente pantalla.
+              </p>
+            </div>
+            
+            <button id="checkout-btn" class="checkout-button" disabled>Confirmar Compra</button>
+          </div>
+          
+          <a href="catalog.html" class="continue-shopping-link">← Continuar comprando</a>
+        </aside>
+      </main>
+    </div>
+  </div>
+  
+  <div id="footer-placeholder"></div>
+</body>
+</html>

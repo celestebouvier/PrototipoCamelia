@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo - Camelia</title>
+  <link rel="stylesheet" href="css/catalogstyles.css"/>
+  <script defer src="js/cart.js"></script>
+  <script defer src="js/catalog.js"></script>
+  <script defer src="js/auth.js"></script>
+  <script defer src="js/load-components.js"></script>
+  <script defer src="js/script.js"></script> 
+</head>
+
+<body>
+  <div class="content-wrap"> 
+  <div id="header-placeholder"></div> 
+
+  <div class="container">
+  <main class="catalog-container">
+    <aside class="filters">
+      <h3>Filtros</h3>
+
+      <label for="filter-age">Edad recomendada</label>
+      <select id="filter-age">
+        <option value="">Todas</option>
+        <option value="Bebés">Bebés</option>
+        <option value="+3 años">+3 años</option>
+        <option value="+5 años">+5 años</option>
+        <option value="8 años en adelante">8 años en adelante</option>
+      </select>
+
+      <label for="filter-type">Tipo de juguete</label>
+      <select id="filter-type">
+        <option value="">Todos</option>
+        <option value="Acción">Acción</option>
+        <option value="Aire libre">Aire libre</option>
+        <option value="Bloques y construcción">Bloques y construcción</option>
+        <option value="Juegos de mesa">Juegos de mesa</option>
+        <option value="Mundo lector">Mundo lector</option>
+        <option value="Muñecas">Muñecas</option>
+        <option value="Musicales">Musicales</option>
+        <option value="Peluches">Peluches</option>
+        <option value="Vehículos">Vehículos</option>
+      </select>
+
+      <label for="filter-character">Personajes</label>
+      <select id="filter-character">
+        <option value="">Todos</option>
+        <option value="Avengers">Avengers</option>
+        <option value="Barbie">Barbie</option>
+        <option value="Cars">Cars</option>
+        <option value="Frozen">Frozen</option>
+        <option value="Hot Wheels">Hot Wheels</option>
+        <option value="Lilo y Stitch">Lilo y Stitch</option>
+        <option value="Mickey y Minnie Mouse">Mickey y Minnie Mouse</option>
+        <option value="Minecraft">Minecraft</option>
+        <option value="Paw Patrol">Paw Patrol</option>
+        <option value="Toy Story">Toy Story</option>
+      </select>
+
+      <button id="reset-filters">Limpiar filtros</button>
+    </aside>
+
+                <section class="catalog-products">
+                    
+                    <div class="catalog-header">
+                        <h2>Catálogo de Productos</h2>
+                        <div class="sort-controls">
+                            <label for="sort-order">Ordenar por:</label>
+                            <select id="sort-order">
+                                <option value="name-asc">Nombre (A-Z)</option>
+                                <option value="price-asc">Menor Precio</option>
+                                <option value="price-desc">Mayor Precio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="catalog-list" class="product-grid"></div>
+                    <div id="pagination" class="pagination"></div> 
+                </section>
+
+
+  </main></div>
+
+ </div> <div id="footer-placeholder"></div>
+</body>
+</html>
