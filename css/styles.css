@@ -1459,3 +1459,70 @@ body {
   }
 
 }
+
+/* --- ADD BELOW: make logged-in user info and logout match the auth button styling --- */
+#user-info {
+    display: inline-flex;               /* behaves like the auth button */
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap;                /* don't break the name into multiple lines */
+    max-width: 260px;                   /* keeps it compact on narrow screens */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.25s ease;
+}
+
+/* If your JS injects an <a> inside #user-info, make it inherit the styles */
+#user-info a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Logout button styled same as auth button */
+#logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+/* Hover/focus state consistent with .auth-btn */
+#logout-btn:hover,
+#user-info:hover {
+    background: white;
+    color: var(--primary-pink);
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.35);
+}
+
+/* Slight spacing / alignment safety inside header */
+.header .container .header-actions {
+    align-items: center; /* ensure vertical centering */
+}
+
+/* Make sure the small profile circle button doesn't push content */
+.profile-btn {
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+} 

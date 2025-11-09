@@ -5,11 +5,22 @@ let currentPage = 1;
 // Función para leer parámetros de la URL
 function getInitialFilter() {
     const params = new URLSearchParams(window.location.search);
+
+    // normalize: replace hyphens with spaces, trim. URLSearchParams already decodes percent-encoding.
+    const normalize = (v) => {
+        if (!v) return null;
+        // ensure it's a string
+        const str = String(v);
+        // replace hyphens with spaces (turn "Aire-libre" -> "Aire libre"), trim whitespace
+        return str.replace(/-/g, ' ').trim();
+    };
+
     return {
         offer: params.get('filter') === 'offer', // Mantiene el filtro de oferta
         search: params.get('search') ? params.get('search').toLowerCase() : null, // Captura y convierte a minúsculas
-        type: params.get('filter-type') || null, 
-        character: params.get('filter-character') || null,
+        type: normalize(params.get('filter-type')),
+        character: normalize(params.get('filter-character')),
+        age: normalize(params.get('filter-age')),
     };
 }
 
@@ -228,13 +239,40 @@ function applyFilters() {
     renderProducts(sortedAndFiltered, currentPage);
 }
 
+// --- Replace the existing fetch(...) .then(...) block with the block below ---
 document.addEventListener("DOMContentLoaded", () => {
   fetch("data/products.json")
     .then(res => res.json())
     .then(data => {
       allProducts = data;
-      // Llamar a applyFilters() para procesar el filtro de la URL
-      applyFilters(); 
+
+      // --- NEW: populate select filters from URL parameters BEFORE rendering ---
+      const initialFilters = getInitialFilter();
+
+      if (initialFilters.type) {
+        const typeEl = document.getElementById('filter-type');
+        if (typeEl) typeEl.value = initialFilters.type;
+      }
+
+      if (initialFilters.character) {
+        const characterEl = document.getElementById('filter-character');
+        if (characterEl) characterEl.value = initialFilters.character;
+      }
+
+      if (initialFilters.age) {
+        const ageEl = document.getElementById('filter-age');
+        if (ageEl) ageEl.value = initialFilters.age;
+      }
+
+      // If you have a search input on this page and want to show the term:
+      if (initialFilters.search) {
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) searchInput.value = initialFilters.search;
+      }
+      // --- End new initialization ---
+
+      // Now apply filters (selects already set from URL) and render products
+      applyFilters();
     })
     .catch(err => {
       console.error("Error cargando productos:", err);
