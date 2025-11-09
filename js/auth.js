@@ -1,4 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Lightweight authentication UI logic for Camelia site.
+// This file initializes immediately if the document is already loaded
+// so it works both on pages that include the header directly and on pages
+// that inject the header dynamically (fetch + innerHTML).
+
+function initAuth() {
   // Registration
   const registerForm = document.getElementById("register-form");
   if (registerForm) {
@@ -54,27 +59,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // UI Session Status
+  // UI Session Status: hide or show controls depending on localStorage currentUser.
+  // NOTE: we intentionally do NOT populate #user-info text to follow the request
+  // to remove the greeting. We only toggle the buttons (register/login ↔ logout/profile/cart).
   const loginBtn = document.querySelector(".auth-btn");
   const registerBtn = document.querySelector(".register-btn");
   const logoutBtn = document.getElementById("logout-btn");
   const userInfo = document.getElementById("user-info");
   const profileBtn = document.querySelector(".profile-btn");
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
   if (currentUser) {
     if (loginBtn) loginBtn.style.display = "none";
     if (registerBtn) registerBtn.style.display = "none";
     if (profileBtn) profileBtn.style.display = "inline";
+    // Remove or hide greeting element if present (we want it deleted)
     if (userInfo) {
-      userInfo.style.display = "inline";
-      userInfo.textContent = `Hola, ${currentUser.name}`;
+      // remove from DOM so it never shows
+      userInfo.remove();
     }
     if (logoutBtn) logoutBtn.style.display = "inline";
   } else {
     if (loginBtn) loginBtn.style.display = "inline";
     if (registerBtn) registerBtn.style.display = "inline";
     if (profileBtn) profileBtn.style.display = "none";
-    if (userInfo) userInfo.style.display = "none";
+    if (userInfo) {
+      userInfo.style.display = "none";
+    }
     if (logoutBtn) logoutBtn.style.display = "none";
   }
 
@@ -83,7 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("currentUser");
-      window.location.reload();
+      // Redirect to index (or reload the page)
+      window.location.href = window.location.pathname.includes('index') ? window.location.href : 'index.html';
     });
   }
 
@@ -111,6 +123,14 @@ document.addEventListener("DOMContentLoaded", () => {
       animation: slideInRight 0.5s ease;
     `;
     setTimeout(() => { if (el) el.remove(); }, 2200);
-    return false; // for `return showAuthMessage()`
+    return false; // useful for returning from validations
   }
-});
+}
+
+// Initialize immediately if DOM already loaded, otherwise wait for DOMContentLoaded.
+// This ensures auth UI toggling runs even when auth.js is inserted after the initial DOMContentLoaded event.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAuth);
+} else {
+  initAuth();
+}

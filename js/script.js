@@ -412,14 +412,14 @@ class Authentication {
         this.showSuccessMessage('Sesión cerrada correctamente');
     }
     
-    handleProfile() {
+    /*handleProfile() {
         if (this.isLoggedIn) {
             console.log('Opening user profile');
             this.showSuccessMessage('Abriendo perfil de usuario');
         } else {
             this.showErrorMessage('Debes iniciar sesión primero');
         }
-    }
+    }*/
     
     showSuccessMessage(message) {
         const messageEl = document.createElement('div');

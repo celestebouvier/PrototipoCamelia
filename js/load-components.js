@@ -20,6 +20,38 @@ async function loadComponent(componentId, filePath) {
             
             // 3. Insertar el HTML en el placeholder.
             placeholder.innerHTML = htmlContent;
+
+            // --------- NEW: Execute any <script> tags found inside the fetched content ----------
+            // Browsers do not execute scripts added via innerHTML. Find script tags and re-create them
+            // so they actually run (this ensures auth.js and any header scripts initialize).
+            const scripts = placeholder.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+
+                // Copy attributes (e.g., src, type). If script has src, set it so browser loads it.
+                Array.from(oldScript.attributes).forEach(attr => {
+                    newScript.setAttribute(attr.name, attr.value);
+                });
+
+                // If the script is inline, copy its content
+                if (!oldScript.src) {
+                    newScript.textContent = oldScript.textContent;
+                }
+
+                // Append to head so it executes
+                document.head.appendChild(newScript);
+
+                // Remove the original inert script tag from the placeholder
+                oldScript.parentNode && oldScript.parentNode.removeChild(oldScript);
+            });
+            // ------------------------------------------------------------------------------
+
+            // Remove the greeting element if present (you asked to delete "Hola, <user>")
+            const userInfoEl = placeholder.querySelector('#user-info');
+            if (userInfoEl) {
+                userInfoEl.remove();
+            }
+
         } catch (error) {
             console.error(`Error loading component ${filePath}:`, error);
             // Mostrar un mensaje de error o fallback en el placeholder si falla la carga.
