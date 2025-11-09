@@ -1,6 +1,5 @@
 /* Toast */
 window.showMessage = function (msg, type = 'info', timeout = 3500) {
-    // type: 'info' | 'success' | 'error'
     const id = 'global-toast-container';
     let container = document.getElementById(id);
     if (!container) {
@@ -75,7 +74,6 @@ function initSearchUI() {
     });
 }
 
-// Ensure search UI initializes even if this script is executed after DOMContentLoaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSearchUI);
 } else {
@@ -489,7 +487,6 @@ class EnvironmentalCommitment {
     }
 }
 
-// ---------------- SmoothScroll ----------------
 class SmoothScroll {
     constructor() {
         this.navLinks = document.querySelectorAll('.nav-link');
@@ -567,17 +564,14 @@ document.addEventListener('DOMContentLoaded', () => {
     addInteractiveEffects();
 });
 
-// ---------------- Interactive effects (sparkles); removed parallax transform ----------------
 function addInteractiveEffects() {
     document.addEventListener('click', (e) => {
         createSparkle(e.clientX, e.clientY);
     });
 
-    // Note: parallax transform removed to keep layout flow correct.
-    // If you later want a safe parallax, animate background-position instead.
+
 }
 
-// ---------------- Sparkle creation ----------------
 function createSparkle(x, y) {
     const sparkle = document.createElement('div');
     sparkle.innerHTML = '✨';

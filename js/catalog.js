@@ -6,12 +6,9 @@ let currentPage = 1;
 function getInitialFilter() {
     const params = new URLSearchParams(window.location.search);
 
-    // normalize: replace hyphens with spaces, trim. URLSearchParams already decodes percent-encoding.
     const normalize = (v) => {
         if (!v) return null;
-        // ensure it's a string
         const str = String(v);
-        // replace hyphens with spaces (turn "Aire-libre" -> "Aire libre"), trim whitespace
         return str.replace(/-/g, ' ').trim();
     };
 
@@ -65,7 +62,6 @@ function renderProducts(products, page = 1) {
     const card = document.createElement("div");
     card.className = "product-card";
 
-    // link wrapper
     const link = document.createElement("a");
     link.className = "product-link";
     link.href = `product.html?id=${p.id}`;
@@ -106,7 +102,6 @@ function renderProducts(products, page = 1) {
 
     if (p.isOffer) {
             const badge = document.createElement("span");
-            // MODIFICACIÓN 2: Usar la clase de oferta resaltada
             badge.className = "sale-badge"; 
             badge.textContent = "Oferta";
             card.appendChild(badge);
@@ -114,7 +109,6 @@ function renderProducts(products, page = 1) {
 
     const buyBtn = document.createElement("button");
 
-    // MODIFICACIÓN 3: Usar clases específicas para los botones
     buyBtn.className = p.stock ? "add-to-cart" : "sold-out"; 
     buyBtn.textContent = p.stock ? "AGREGAR 🛒" : "AGOTADO";
     buyBtn.disabled = !p.stock;
@@ -264,14 +258,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (ageEl) ageEl.value = initialFilters.age;
       }
 
-      // If you have a search input on this page and want to show the term:
       if (initialFilters.search) {
         const searchInput = document.querySelector('.search-input');
         if (searchInput) searchInput.value = initialFilters.search;
       }
-      // --- End new initialization ---
 
-      // Now apply filters (selects already set from URL) and render products
       applyFilters();
     })
     .catch(err => {

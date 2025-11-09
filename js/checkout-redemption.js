@@ -1,24 +1,17 @@
-// js/checkout-redemption.js
-// Handles the redemption-only checkout flow when ?redemption=true&prizeId=ID
-
 (function () {
-    // Utility
     function qs(name) {
         const params = new URLSearchParams(window.location.search);
         return params.get(name);
     }
 
-    // Only run if redemption param is present
     if (qs('redemption') !== 'true') return;
 
-    // Elements: ensure checkout.html contains #redemption-container
     const container = document.getElementById('redemption-container');
     if (!container) return;
 
     const prizeId = qs('prizeId');
     const pointsRequired = parseInt(qs('points'), 10) || 0;
 
-    // Fetch prize details
     fetch('data/products.json')
         .then(r => r.json())
         .then(products => {
@@ -28,7 +21,6 @@
                 return;
             }
 
-            // Build redemption UI
             container.innerHTML = `
                 <div class="card" style="padding:20px;">
                     <h2>Confirmar Canje</h2>
@@ -85,22 +77,18 @@
 
             form.addEventListener('submit', (ev) => {
                 ev.preventDefault();
-                // Recompute total
                 const shipping = form.querySelector('input[name="shipping"]:checked').value;
                 const total = shipping === 'correo' ? 1500 : 0;
                 const eco = document.getElementById('eco-pack').checked;
 
-                // Check points again
                 if (currentUser.points < pointsRequired) {
                     if (typeof showMessage === 'function') showMessage('No tienes suficientes puntos para completar el canje.', 'error');
                     return;
                 }
 
-                // Deduct points
                 currentUser.points -= pointsRequired;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-                // Build comprobante (receipt)
                 const now = new Date();
                 const receipt = {
                     productName: prize.name,
@@ -116,45 +104,18 @@
                     date: now.toLocaleString()
                 };
 
-                // Render receipt area with print button
-                const resultEl = document.getElementById('redemption-result');
-                resultEl.innerHTML = `
-                    <div style="padding:12px;border-radius:8px;background:#f7f7fb;">
-                        <h3>Comprobante de Canje</h3>
-                        <p><strong>Producto:</strong> ${receipt.productName}</p>
-                        <p><strong>Fecha:</strong> ${receipt.date}</p>
-                        <p><strong>Usuario:</strong> ${receipt.user.name} — ${receipt.user.email}</p>
-                        <p><strong>Puntos descontados:</strong> ${receipt.pointsUsed.toLocaleString('es-AR')}</p>
-                        <p><strong>Método de envío:</strong> ${receipt.shippingMethod}</p>
-                        <p><strong>Total a pagar:</strong> $${receipt.totalPaid}</p>
-                        <div style="margin-top:12px;">
-                            <button id="print-receipt" class="cta-btn primary-btn">Imprimir Comprobante</button>
-                            <a href="points.html" class="cta-btn secondary-btn" style="margin-left:10px;">Volver a Mis Puntos</a>
-                        </div>
-                    </div>
-                `;
+                try {
+                    sessionStorage.setItem('lastRedemptionReceipt', JSON.stringify(receipt));
+                } catch (e) {
+                    console.warn('Could not save receipt to sessionStorage', e);
+                }
 
-                // Show toast
-                if (typeof showMessage === 'function') showMessage('Canje confirmado. Se han descontado tus puntos.', 'success', 3500);
-
-                document.getElementById('print-receipt').addEventListener('click', () => {
-                    // Create a printable new window with receipt HTML
-                    const printWindow = window.open('', '_blank', 'width=800,height=600');
-                    printWindow.document.write(`<html><head><title>Comprobante de Canje</title>`);
-                    printWindow.document.write(`<style>
-                        body{font-family: Arial, sans-serif;padding:20px}
-                        h2{color:#333}
-                        .receipt{border:1px solid #ddd;padding:20px;border-radius:8px}
-                        </style>`);
-                    printWindow.document.write(`</head><body>`);
-                    printWindow.document.write(resultEl.innerHTML);
-                    printWindow.document.write(`<script>window.onload=function(){window.print();}</script>`);
-                    printWindow.document.write(`</body></html>`);
-                    printWindow.document.close();
-                });
+                if (typeof showMessage === 'function') showMessage('Canje confirmado. Preparando comprobante...', 'success', 1500);
+                setTimeout(() => {
+                    window.location.href = 'comprobante.html';
+                }, 600);
             });
 
-            // Cancel button
             document.getElementById('redemption-cancel').addEventListener('click', () => {
                 window.location.href = 'points.html';
             });

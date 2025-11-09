@@ -19,15 +19,11 @@
 
 /* Contenedor Principal (Tarjeta de Formulario) */
 .payment-container {
-  /* MODIFICACIÓN: Reducción extrema del ancho (de 350px a 300px) */
   max-width: 300px; 
-  /* MODIFICACIÓN: Reducción del margen superior para subirlo */
   margin: 30px auto 20px auto; 
   background-color: var(--white);
-  /* MODIFICACIÓN: Se reduce el borde */
   border-radius: 8px; 
   box-shadow: var(--shadow-light);
-  /* MODIFICACIÓN: Reducción significativa del padding (de 25px a 18px) */
   padding: 18px; 
   border: 1px solid #f0f0f0; /* Borde sutil */
 }
@@ -35,25 +31,21 @@
 .page-title {
   text-align: center;
   color: var(--primary-blue);
-  /* MODIFICACIÓN: Reducción del tamaño de fuente (de 1.5rem a 1.3rem) */
   font-size: 1.3rem; 
-  /* MODIFICACIÓN: Reducción del margen inferior */
   margin-bottom: 15px;
   font-weight: 700;
   border-bottom: 2px solid var(--primary-pink); /* Línea decorativa */
-  /* MODIFICACIÓN: Reducción del padding inferior */
   padding-bottom: 6px;
 }
 
 .page-title i {
-  margin-right: 5px; /* MODIFICACIÓN: Se reduce el margen */
+  margin-right: 5px;
   color: var(--primary-pink);
 }
 
 .payment-form {
   display: flex;
   flex-direction: column;
-  /* MODIFICACIÓN: Reducción del espacio entre elementos (de 15px a 12px) */
   gap: 12px;
 }
 
@@ -65,19 +57,14 @@
 .form-group label {
   color: var(--dark-gray);
   font-weight: 600;
-  /* MODIFICACIÓN: Se reduce el margen inferior */
   margin-bottom: 4px; 
-  /* MODIFICACIÓN: Reducción del tamaño de fuente (de 0.9rem a 0.85rem) */
   font-size: 0.85rem;
 }
 
 .form-group input {
-  /* MODIFICACIÓN: Reducción del padding en inputs (de 10px a 8px y de 12px a 10px) */
   padding: 8px 10px; 
   border: 1px solid var(--border-color);
-  /* MODIFICACIÓN: Se reduce el borde redondeado */
   border-radius: 4px; 
-  /* MODIFICACIÓN: Reducción del tamaño de fuente */
   font-size: 0.9rem;
   background-color: var(--light-gray);
   transition: border-color 0.3s, box-shadow 0.3s;
@@ -94,7 +81,6 @@
 /* Contenedor para Fecha y CVV */
 .form-row {
   display: flex;
-  /* MODIFICACIÓN: Reducción del espacio entre elementos (de 10px a 8px) */
   gap: 8px;
 }
 
@@ -104,15 +90,11 @@
 
 /* Mensajes de formulario (Error/Éxito) */
 .form-message {
-  /* MODIFICACIÓN: Se reduce el padding */
   padding: 8px;
-  /* MODIFICACIÓN: Se reduce el margen superior */
   margin-top: 8px;
-  /* MODIFICACIÓN: Se reduce el borde redondeado */
   border-radius: 4px;
   text-align: center;
   font-weight: 600;
-  /* MODIFICACIÓN: Reducción del tamaño de fuente */
   font-size: 0.8rem;
 }
 
@@ -132,17 +114,13 @@
 .cta-btn.primary-btn {
   background-color: var(--primary-pink);
   color: var(--white);
-  /* MODIFICACIÓN: Reducción del padding (de 12px a 10px) */
   padding: 10px;
   border: none;
-  /* MODIFICACIÓN: Se reduce el borde redondeado */
   border-radius: 4px;
-  /* MODIFICACIÓN: Reducción del tamaño de fuente (de 1rem a 0.9rem) */
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.1s;
-  /* MODIFICACIÓN: Se reduce el margen superior */
   margin-top: 10px;
 }
 
@@ -155,7 +133,6 @@
 /* Responsividad para móviles */
 @media (max-width: 650px) {
   .payment-container {
-    /* Mantenemos el ajuste para móvil, pero reducimos el padding y margen */
     max-width: 100%;
     margin: 10px 5px;
     padding: 15px;

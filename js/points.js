@@ -1,5 +1,4 @@
-// js/points.js - edited to use in-page messages and to redirect to redemption-only checkout
-
+// js/points.js 
 const REDEMPTION_GRID = document.getElementById("redemption-grid");
 const CURRENT_POINTS_EL = document.getElementById("current-points");
 
@@ -12,7 +11,7 @@ async function fetchPrizes() {
 function loadPointsAndPrizes() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (!currentUser) {
-        // Use in-page message and redirect to login
+
         if (typeof showMessage === 'function') {
             showMessage("Debes iniciar sesión para ver tus puntos.", "info", 3000);
         } else {
@@ -63,7 +62,6 @@ function loadPointsAndPrizes() {
             if (canRedeem) {
                 const btn = card.querySelector('button');
                 btn.addEventListener('click', (e) => {
-                    // Redirect to the redemption checkout passing prizeId and pointsRequired
                     const prizeId = e.currentTarget.dataset.id;
                     const pointsRequired = e.currentTarget.dataset.points;
                     const url = `checkout.html?redemption=true&prizeId=${encodeURIComponent(prizeId)}&points=${encodeURIComponent(pointsRequired)}`;
@@ -78,7 +76,6 @@ function loadPointsAndPrizes() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // ensure debug default points if not present (optional)
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser && typeof currentUser.points === 'undefined') {
         currentUser.points = 1000;

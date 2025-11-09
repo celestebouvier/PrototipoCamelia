@@ -68,7 +68,7 @@
     margin: 0; 
 }
 
-/* --- Filtros (CAJA MÁS CORTA) --- */
+/* --- Filtros --- */
 .filters {
     flex-basis: 250px; 
     flex-shrink: 0;
@@ -77,7 +77,6 @@
     border-radius: 12px; 
     background-color: var(--white);
     box-shadow: var(--shadow-light);
-    /* **REQUERIMIENTO: Hace que la caja se ajuste a su contenido y termine en el botón** */
     height: fit-content; 
 }
 
@@ -100,7 +99,6 @@
 .filters button {
     display: block;
     width: 100%;
-    /* **REQUERIMIENTO: Margen reducido para acortar la caja de filtro** */
     margin-bottom: 0.75rem; 
 }
 
@@ -147,13 +145,12 @@
 /* --- Lista de Productos (Catálogo) --- */
 #catalog-list {
     display: grid;
-    /* Optimización: Mantiene el buen flujo en 5 columnas */
     grid-template-columns: repeat(5, 1fr); 
     gap: 1.5rem; 
 }
 
 .product-card {
-    position: relative; /* Esencial para posicionar el badge de oferta */
+    position: relative; 
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -174,8 +171,7 @@
     box-shadow: var(--shadow-hover);
 }
 
-/* **REQUERIMIENTO: ETIQUETA DE OFERTA RESALTADA** */
-.sale-badge { /* Cambiado de .product-card .sale-badge */
+.sale-badge { 
     position: absolute;
     top: 10px;
     left: 10px;
@@ -218,14 +214,13 @@
     text-overflow: ellipsis;
 }
 
-/* Contenedor principal de precio para evitar conflicto con los nuevos */
 .product-card p.price {
     padding: 0;
     margin: 5px 0 0 0;
     line-height: 1.1; /* Asegura un espacio compacto entre IVA y SIN IVA */
 }
 
-/* **REQUERIMIENTO: Precio con IVA (Destacado y Grande)** */
+/* recio con IVA (Destacado y Grande)** */
 .product-card p.price-with-iva {
     font-size: 1.4rem; 
     font-weight: 900;
@@ -233,7 +228,7 @@
     margin: 0; /* Limpieza de margen */
 }
 
-/* **REQUERIMIENTO: Precio sin IVA (Sub-texto y Sutil)** */
+/* Precio sin IVA (Sub-texto y Sutil)** */
 .product-card p.price-without-iva {
     font-size: 0.85rem; 
     font-weight: 500;
@@ -243,7 +238,7 @@
 }
 
 
-/* **REQUERIMIENTO: BOTONES UNIFORMES (Agregar al carrito / Agotado)** */
+/* BOTONES UNIFORMES (Agregar al carrito / Agotado)** */
 .product-card button.add-to-cart,
 .product-card button.sold-out { 
     margin-top: 10px; 

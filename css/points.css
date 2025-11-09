@@ -1,8 +1,3 @@
-/* css/points.css (Estilos Complementarios y Corregidos) */
-/* ... (Variables y estilos generales del :root y .points-page, etc. se mantienen) ... */
-
-/* ----------- Título y Balance de Puntos ----------- */
-
 .points-balance {
   background: linear-gradient(135deg, var(--primary-blue), #b3e0f0); /* Degradado más suave */
   color: var(--dark-gray);
@@ -79,7 +74,6 @@
   font-style: italic;
 }
 
-/* === GRID CONTAINER === */
 .product-grid {
   display: grid;
   /* Define el número de columnas: 3 por defecto, mínimo de 250px por columna */

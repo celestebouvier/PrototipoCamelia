@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutProfileBtn = document.getElementById("logout-profile-btn");
     const messageEl = document.getElementById("profile-message");
 
-    function showProfileMessage(msg, isError = false) { /* ... (CSS en línea omitido por brevedad) ... */ }
+    function showProfileMessage(msg, isError = false) {  }
 
     if (currentUser) {
         userGreeting.textContent = `Hola, ${currentUser.name}`;

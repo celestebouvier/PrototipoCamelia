@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Comprobante de Canje</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #fff 0%, #fbfbff 100%);
+            font-family: 'Roboto', sans-serif;
+            color: #222;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .receipt-wrapper {
+            width: 100%;
+            max-width: 820px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            padding: 28px;
+        }
+
+        .receipt-header {
+            display:flex;
+            align-items:center;
+            gap:16px;
+            margin-bottom: 10px;
+        }
+
+        .receipt-header h1 {
+            margin:0;
+            font-size: 22px;
+            color: var(--primary-blue);
+        }
+
+        .receipt-body p {
+            margin:8px 0;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .receipt-actions {
+            margin-top:16px;
+            display:flex;
+            gap:12px;
+        }
+
+        .receipt-actions .cta-btn {
+            padding: 10px 20px;
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .receipt-actions { display:none; }
+            .receipt-wrapper { box-shadow:none; border: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-wrapper" id="receipt-wrapper">
+        <div class="receipt-header">
+            <h1>Comprobante de Canje</h1>
+        </div>
+
+        <div id="receipt-content" class="receipt-body">
+            <p>Cargando comprobante...</p>
+        </div>
+
+        <div class="receipt-actions">
+            <button id="print-btn" class="cta-btn primary-btn">Imprimir Comprobante</button>
+            <a id="back-points" href="points.html" class="cta-btn secondary-btn">Volver a Mis Puntos</a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            function safeParse(key) {
+                try {
+                    return JSON.parse(sessionStorage.getItem(key));
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            const receipt = safeParse('lastRedemptionReceipt');
+            const contentEl = document.getElementById('receipt-content');
+
+            if (!receipt) {
+                contentEl.innerHTML = '<p>No se encontró comprobante. Volvé a la página de puntos para generar uno.</p>';
+                return;
+            }
+
+            // Build HTML
+            contentEl.innerHTML = `
+                <p><strong>Producto:</strong> ${escapeHtml(receipt.productName)}</p>
+                <p><strong>Fecha:</strong> ${escapeHtml(receipt.date)}</p>
+                <p><strong>Usuario:</strong> ${escapeHtml(receipt.user.name)} — ${escapeHtml(receipt.user.email)}</p>
+                <p><strong>Puntos descontados:</strong> ${Number(receipt.pointsUsed).toLocaleString('es-AR')}</p>
+                <p><strong>Método de envío:</strong> ${escapeHtml(receipt.shippingMethod)}</p>
+                <p><strong>Empaque ecológico:</strong> ${receipt.ecoPackaging ? 'Sí' : 'No'}</p>
+                <p><strong>Total a pagar:</strong> $${Number(receipt.totalPaid).toLocaleString('en-US')}</p>
+            `;
+
+            // Botón de imprimir
+            document.getElementById('print-btn').addEventListener('click', () => {
+                window.print();
+            });
+
+            function escapeHtml(s) {
+                if (!s && s !== 0) return '';
+                return String(s)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+        })();
+    </script>
+</body>
+</html>

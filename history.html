@@ -69,7 +69,6 @@ userHistory.forEach(order => {
             listEl.appendChild(div);
         });
 
-        // Add listener for all print buttons
         document.querySelectorAll('.print-pdf-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const orderId = e.target.dataset.orderId;

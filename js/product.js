@@ -78,8 +78,6 @@ thumb.classList.add('active-thumb');
       (infoEl.querySelector('#product-dimensions') || {}).innerHTML = `<strong>Dimensiones:</strong> ${product.height}cm x ${product.width}cm`;
       (infoEl.querySelector('#product-weight') || {}).innerHTML = `<strong>Peso:</strong> ${product.weight} g`;
 
-      // ************** ELEMENTOS DINÁMICOS **************
-      
       // Remueve cualquier sección anterior de cantidad/botones para evitar duplicados
       const existingBuyActions = infoEl.querySelector('.buy-actions');
       if (existingBuyActions) existingBuyActions.remove();
@@ -87,9 +85,8 @@ thumb.classList.add('active-thumb');
       if (existingQtyWrap) existingQtyWrap.remove();
 
       if (product.stock) {
-          // Quantity selector
           const qtyWrap = document.createElement("div");
-          qtyWrap.className = "product-qty-section"; // Una clase para estilizado
+          qtyWrap.className = "product-qty-section"; 
           qtyWrap.innerHTML = `
             <label for="qty">Cantidad:</label>
             <input type="number" id="qty" name="qty" min="1" max="10" value="1" style="width:80px; margin-left:8px; padding:6px; border-radius:6px; border: 1px solid #ddd;"/>
@@ -103,21 +100,19 @@ const addBtn = document.createElement("button");
 addBtn.className = "buy-btn primary-btn";
 addBtn.textContent = "Agregar al carrito";
 
-buyActions.appendChild(addBtn); // Solo añadimos este botón
+buyActions.appendChild(addBtn); 
 
-// Insertar antes de la sección de detalles extra (si existe)
 const detailsExtra = infoEl.querySelector('.product-details-extra');
 if (detailsExtra) {
-            infoEl.insertBefore(qtyWrap, detailsExtra);
+infoEl.insertBefore(qtyWrap, detailsExtra);
 infoEl.insertBefore(buyActions, detailsExtra);
 } else {
-// Si no hay detalles extra, simplemente añadir al final
 infoEl.appendChild(qtyWrap); 
 infoEl.appendChild(buyActions);
 }
 
 
-          // Event listener para el botón "Agregar al carrito"
+
           addBtn.addEventListener("click", () => {
             const qtyInput = document.getElementById("qty"); // ID 'qty' usado en la generación dinámica
             const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
@@ -128,8 +123,6 @@ infoEl.appendChild(buyActions);
             }
           });
           
-          // // Event listener para el botón "Comprar ahora" (ELIMINADO)
-          // buyBtn.addEventListener("click", () => { ... }) // ELIMINADO
           
       } else {
         // Si no hay stock, agregar un mensaje de agotado visiblemente si aún no está.
@@ -150,8 +143,7 @@ infoEl.appendChild(buyActions);
       // ------------------------------------------
       const extraDetailsEl = document.getElementById("product-extra-details");
       if (extraDetailsEl) {
-        extraDetailsEl.innerHTML = ""; // Limpiar antes de añadir
-        // Ejemplo de otros detalles que pueden venir del JSON
+        extraDetailsEl.innerHTML = ""; 
         if (product.isPrize) {
           const li = document.createElement('li');
           li.textContent = `Disponible para canje por ${product.points_required} puntos.`;
@@ -163,7 +155,6 @@ extraDetailsEl.appendChild(li);
 extraDetailsEl.appendChild(li);
 }
  
-// Si no hay detalles extras, ocultar el contenedor o limpiarlo si es necesario
         if (extraDetailsEl.children.length === 0) {
             const parentSection = infoEl.querySelector('.product-details-extra');
             if(parentSection) parentSection.style.display = 'none';

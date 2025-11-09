@@ -1,10 +1,4 @@
-// Lightweight authentication UI logic for Camelia site.
-// This file initializes immediately if the document is already loaded
-// so it works both on pages that include the header directly and on pages
-// that inject the header dynamically (fetch + innerHTML).
-
 function initAuth() {
-  // Registration
   const registerForm = document.getElementById("register-form");
   if (registerForm) {
     registerForm.addEventListener("submit", (e) => {
@@ -59,9 +53,6 @@ function initAuth() {
     });
   }
 
-  // UI Session Status: hide or show controls depending on localStorage currentUser.
-  // NOTE: we intentionally do NOT populate #user-info text to follow the request
-  // to remove the greeting. We only toggle the buttons (register/login ↔ logout/profile/cart).
   const loginBtn = document.querySelector(".auth-btn");
   const registerBtn = document.querySelector(".register-btn");
   const logoutBtn = document.getElementById("logout-btn");
@@ -73,9 +64,8 @@ function initAuth() {
     if (loginBtn) loginBtn.style.display = "none";
     if (registerBtn) registerBtn.style.display = "none";
     if (profileBtn) profileBtn.style.display = "inline";
-    // Remove or hide greeting element if present (we want it deleted)
+   
     if (userInfo) {
-      // remove from DOM so it never shows
       userInfo.remove();
     }
     if (logoutBtn) logoutBtn.style.display = "inline";
@@ -94,12 +84,10 @@ function initAuth() {
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("currentUser");
-      // Redirect to index (or reload the page)
       window.location.href = window.location.pathname.includes('index') ? window.location.href : 'index.html';
     });
   }
 
-  // Helper for styled message display
   function showAuthMessage(msg, isError = false) {
     let el = document.querySelector(".auth-message");
     if (!el) {
@@ -123,12 +111,11 @@ function initAuth() {
       animation: slideInRight 0.5s ease;
     `;
     setTimeout(() => { if (el) el.remove(); }, 2200);
-    return false; // useful for returning from validations
+    return false; 
   }
 }
 
-// Initialize immediately if DOM already loaded, otherwise wait for DOMContentLoaded.
-// This ensures auth UI toggling runs even when auth.js is inserted after the initial DOMContentLoaded event.
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initAuth);
 } else {
