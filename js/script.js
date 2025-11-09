@@ -1,3 +1,88 @@
+/* Toast */
+window.showMessage = function (msg, type = 'info', timeout = 3500) {
+    // type: 'info' | 'success' | 'error'
+    const id = 'global-toast-container';
+    let container = document.getElementById(id);
+    if (!container) {
+        container = document.createElement('div');
+        container.id = id;
+        container.style.cssText = `
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 20000;
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            align-items: flex-end;
+            pointer-events: none;
+        `;
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'global-toast ' + type;
+    toast.style.cssText = `
+        min-width: 220px;
+        max-width: 380px;
+        background: ${type === 'error' ? '#ff4757' : type === 'success' ? 'linear-gradient(135deg,#7be495,#2ecc71)' : 'linear-gradient(135deg,#87ceeb,#c3e7ff)'};
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        font-weight: 600;
+        font-size: 14px;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: all 240ms ease;
+        pointer-events: auto;
+    `;
+    toast.textContent = msg;
+    container.appendChild(toast);
+
+    // show
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-6px)';
+        setTimeout(() => toast.remove(), 260);
+    }, timeout);
+};
+
+// Busqueda
+function initSearchUI() {
+    const searchForm = document.querySelector('.search-form');
+    const searchInput = document.querySelector('.search-input');
+
+    if (!searchForm) return;
+
+    if (searchForm.dataset.searchInit === 'true') return;
+    searchForm.dataset.searchInit = 'true';
+
+    searchForm.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const query = (searchInput && searchInput.value || '').trim();
+        if (!query) {
+            showMessage('Ingresa un término de búsqueda', 'info');
+            return;
+        }
+        const encoded = encodeURIComponent(query);
+        window.location.href = `catalog.html?search=${encoded}`;
+    });
+}
+
+// Ensure search UI initializes even if this script is executed after DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearchUI);
+} else {
+    initSearchUI();
+}
+
+// ---------------- Carrusel ----------------
 class Carousel {
     constructor() {
         this.currentSlide = 0;
@@ -64,92 +149,8 @@ class Carousel {
         }
     }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.querySelector('.search-input');
-    const searchBtn = document.querySelector('.search-btn');
 
-    // Función que maneja la búsqueda y la redirección
-    const handleSearch = () => {
-        const query = searchInput.value.trim();
-        
-        if (query) {
-            // Codifica el término de búsqueda para que pueda viajar seguro en la URL
-            const encodedQuery = encodeURIComponent(query);
-            
-            // Redirige al catálogo con el parámetro 'search'
-            window.location.href = `catalog.html?search=${encodedQuery}`;
-        }
-    };
-
-    // 1. Evento para el botón de búsqueda
-    if (searchBtn) {
-        searchBtn.addEventListener('click', handleSearch);
-    }
-
-    // 2. Evento para la tecla 'Enter' en el campo de texto
-    if (searchInput) {
-        searchInput.addEventListener('keypress', (event) => {
-            // Código 13 es la tecla Enter
-            if (event.key === 'Enter') { 
-                handleSearch();
-                event.preventDefault(); // Evita que el formulario se envíe (si estuviera en uno)
-            }
-        });
-    }
-});
-/*class ShoppingCart {
-    constructor() {
-        this.cartBtn = document.querySelector('.cart-btn');
-        this.cartCount = document.querySelector('.cart-count');
-        this.items = [];
-        
-        this.init();
-    }
-    
-    init() {
-        if (this.cartBtn) {
-            this.cartBtn.addEventListener('click', () => this.toggleCart());
-        }
-        this.updateCartDisplay();
-    }
-    
-    addItem(item) {
-        this.items.push(item);
-        this.updateCartDisplay();
-        this.animateCartAdd();
-    }
-    
-    removeItem(itemId) {
-        this.items = this.items.filter(item => item.id !== itemId);
-        this.updateCartDisplay();
-    }
-    
-    updateCartDisplay() {
-        if (this.cartCount) {
-            this.cartCount.textContent = this.items.length;
-            
-            if (this.items.length > 0) {
-                this.cartCount.style.display = 'flex';
-            } else {
-                this.cartCount.style.display = 'none';
-            }
-        }
-    }
-    
-    animateCartAdd() {
-        if (this.cartBtn) {
-            this.cartBtn.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                this.cartBtn.style.transform = 'scale(1)';
-            }, 200);
-        }
-    }
-    
-    toggleCart() {
-        console.log('Cart toggled');
-    }
-}*/
-
+// ---------------- Newsletter ----------------
 class Newsletter {
     constructor() {
         this.newsletterForm = document.querySelector('.newsletter-form');
@@ -205,32 +206,20 @@ class Newsletter {
     }
     
     showSuccessMessage() {
-        alert("¡Gracias por suscribirte!");
-        const message = document.createElement('div');
-        message.className = 'success-message';
-        message.innerHTML = '¡Gracias por suscribirte! 🌸';
-        message.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #ff69b4, #87ceeb);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            z-index: 10000;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        
-        document.body.appendChild(message);
-        
-        setTimeout(() => {
-            message.remove();
-        }, 3000);
+        // Use the global toast instead of alert or custom DOM alerts
+        if (typeof showMessage === 'function') {
+            showMessage("¡Gracias por suscribirte! 🌸", 'success', 3000);
+        } else {
+            alert("¡Gracias por suscribirte!");
+        }
     }
     
     showErrorMessage() {
-        alert("Por favor, ingresa un email válido.");
+        if (typeof showMessage === 'function') {
+            showMessage("Por favor, ingresa un email válido.", 'error', 3000);
+        } else {
+            alert("Por favor, ingresa un email válido.");
+        }
         if (this.newsletterInput) {
             this.newsletterInput.style.borderColor = '#ff4757';
             this.newsletterInput.placeholder = 'Por favor, ingresa un email válido';
@@ -243,6 +232,7 @@ class Newsletter {
     }
 }
 
+// ---------------- Categories ----------------
 class Categories {
     constructor() {
         this.categoryCards = document.querySelectorAll('.category-card');
@@ -282,6 +272,8 @@ class Categories {
         }
     }
 }
+
+// ---------------- CharacterCarousel ----------------
 class CharacterCarousel {
     constructor() {
         this.track = document.querySelector('.character-track');
@@ -304,7 +296,6 @@ class CharacterCarousel {
             this.nextBtn.addEventListener('click', () => this.nextSlide());
         }
         
-
         this.cards.forEach(card => {
             card.addEventListener('click', () => this.selectCharacter(card));
         });
@@ -314,7 +305,9 @@ class CharacterCarousel {
     }
     
     adjustCardsToShow() {
-        const containerWidth = document.querySelector('.character-carousel').offsetWidth;
+        const container = document.querySelector('.character-carousel');
+        if (!container) return;
+        const containerWidth = container.offsetWidth;
         this.cardsToShow = Math.floor(containerWidth / 200);
         if (this.cardsToShow < 1) this.cardsToShow = 1;
         if (this.cardsToShow > this.cards.length) this.cardsToShow = this.cards.length;
@@ -346,17 +339,14 @@ class CharacterCarousel {
         const characterName = card.querySelector('h3').textContent;
         console.log(`Selected character: ${characterName}`);
         
-        
         card.style.transform = 'scale(0.95)';
         setTimeout(() => {
             card.style.transform = '';
         }, 150);
-        
-   
     }
 }
 
-
+// ---------------- Authentication ----------------
 class Authentication {
     constructor() {
         this.authBtn = document.querySelector('.auth-btn');
@@ -412,65 +402,63 @@ class Authentication {
         this.showSuccessMessage('Sesión cerrada correctamente');
     }
     
-    /*handleProfile() {
+    handleProfile() {
         if (this.isLoggedIn) {
             console.log('Opening user profile');
             this.showSuccessMessage('Abriendo perfil de usuario');
         } else {
             this.showErrorMessage('Debes iniciar sesión primero');
         }
-    }*/
+    }
     
     showSuccessMessage(message) {
-        const messageEl = document.createElement('div');
-        messageEl.className = 'auth-message success';
-        messageEl.innerHTML = message;
-        messageEl.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #ff69b4, #87ceeb);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            z-index: 10000;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        
-        document.body.appendChild(messageEl);
-        
-        setTimeout(() => {
-            messageEl.remove();
-        }, 3000);
+        if (typeof showMessage === 'function') showMessage(message, 'success');
+        else {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'auth-message success';
+            messageEl.innerHTML = message;
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #ff69b4, #87ceeb);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            document.body.appendChild(messageEl);
+            setTimeout(() => { messageEl.remove(); }, 3000);
+        }
     }
     
     showErrorMessage(message) {
-        const messageEl = document.createElement('div');
-        messageEl.className = 'auth-message error';
-        messageEl.innerHTML = message;
-        messageEl.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #ff4757;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            z-index: 10000;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        
-        document.body.appendChild(messageEl);
-        
-        setTimeout(() => {
-            messageEl.remove();
-        }, 3000);
+        if (typeof showMessage === 'function') showMessage(message, 'error');
+        else {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'auth-message error';
+            messageEl.innerHTML = message;
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #ff4757;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            document.body.appendChild(messageEl);
+            setTimeout(() => { messageEl.remove(); }, 3000);
+        }
     }
 }
 
-
+// ---------------- EnvironmentalCommitment ----------------
 class EnvironmentalCommitment {
     constructor() {
         this.ecoBtn = document.querySelector('.eco-btn');
@@ -501,6 +489,7 @@ class EnvironmentalCommitment {
     }
 }
 
+// ---------------- SmoothScroll ----------------
 class SmoothScroll {
     constructor() {
         this.navLinks = document.querySelectorAll('.nav-link');
@@ -529,6 +518,8 @@ class SmoothScroll {
         }
     }
 }
+
+// ---------------- ScrollAnimations ----------------
 class ScrollAnimations {
     constructor() {
         this.observer = new IntersectionObserver(
@@ -540,7 +531,7 @@ class ScrollAnimations {
     }
     
     init() {
-        const animatedElements = document.querySelectorAll('.category-card, .newsletter, .commitment-card, .character-card');
+        const animatedElements = document.querySelectorAll('.category-card, .newsletter, .commitment-card, .character-card, .product-card');
         animatedElements.forEach(element => {
             this.observer.observe(element);
         });
@@ -556,6 +547,7 @@ class ScrollAnimations {
     }
 }
 
+// ---------------- DOM Ready init ----------------
 document.addEventListener('DOMContentLoaded', () => {
     new Carousel();
     new Newsletter();
@@ -575,17 +567,17 @@ document.addEventListener('DOMContentLoaded', () => {
     addInteractiveEffects();
 });
 
+// ---------------- Interactive effects (sparkles); removed parallax transform ----------------
 function addInteractiveEffects() {
     document.addEventListener('click', (e) => {
         createSparkle(e.clientX, e.clientY);
     });
 
-    // NOTE: Removed the parallax transform on scroll that moved the .hero-carousel visually.
-    // That transform caused the carousel to overlap the content below because transforms do not affect layout.
-    // Keeping the carousel in normal document flow ensures categories always remain visible and do not overlap.
+    // Note: parallax transform removed to keep layout flow correct.
+    // If you later want a safe parallax, animate background-position instead.
 }
 
-
+// ---------------- Sparkle creation ----------------
 function createSparkle(x, y) {
     const sparkle = document.createElement('div');
     sparkle.innerHTML = '✨';
@@ -605,7 +597,6 @@ function createSparkle(x, y) {
         sparkle.remove();
     }, 1000);
 }
-
 
 const sparkleStyle = document.createElement('style');
 sparkleStyle.textContent = `
@@ -634,5 +625,9 @@ sparkleStyle.textContent = `
             transform: translateX(0);
         }
     }
+
+    /* small toast default styles, in case CSS doesn't include them */
+    .global-toast.success { }
+    .global-toast.error { }
 `;
 document.head.appendChild(sparkleStyle);
